@@ -1212,102 +1212,117 @@
 // };
 
 // console.log(reverseSeq(5));
+("--------------------------------------------------------------------------------------");
+("Множення функціями за допомогою замикання");
+("Розв'язання з codewars 1 ");
+// const zero = a => (a ? a(0) : 0);
+// const one = a => (a ? a(1) : 1);
+// const two = a => (a ? a(2) : 2);
+// const three = a => (a ? a(3) : 3);
+// const four = a => (a ? a(4) : 4);
+// const five = a => (a ? a(5) : 5);
+// const six = a => (a ? a(6) : 6);
+// const seven = a => (a ? a(7) : 7);
+// const eight = a => (a ? a(8) : 8);
+// const nine = a => (a ? a(9) : 9);
 
-// function zero(action) {
-// 	if (action) {
-// 		return action(0);
+// const plus = a => b => a + b;
+// const minus = a => b => b - a;
+// const dividedBy = a => b => Math.floor(b / a);
+// const times = a => b => a * b;
+
+// console.log(two(times(eight())));
+("--------------------------------------------------------------------------------------");
+("Повертає з масиву тільки веселі смайли");
+("Моє розв'язання");
+// function countSmileys(arr) {
+// 	const regExp = /^(?!.*(.).*\1)[:;~\)D-]+$/;
+// 	const eyes = [":", ";"];
+// 	const nose = ["-", "~"];
+// 	const mouth = [")", "D"];
+
+// 	return arr.length
+// 		? arr.filter(e => {
+// 				if (regExp.test(e) && e.length <= 3) {
+// 					if (e.length > 2 && eyes.includes(e[0]) && nose.includes(e[1]) && mouth.includes(e[2])) {
+// 						return e;
+// 					} else if (eyes.includes(e[0]) && mouth.includes(e[1])) {
+// 						return e;
+// 					}
+// 				}
+// 		  })
+// 		: 0;
+// }
+// console.log(countSmileys([":)", ":(", ":D", ":O", ":;"]));
+("Моє розв'язання (Рекурсія)");
+// function countSmileys(arr, i = 0, result = []) {
+// 	const regExp = /^[:;][-~]?[)D]$/;
+
+// 	if (i >= arr.length) {
+// 		return result;
 // 	}
 
-// 	return 0;
-// }
-// function one(action) {
-// 	if (action) {
-// 		return action(1);
+// 	if (regExp.test(arr[i])) {
+// 		result.push(arr[i]);
+// 		return countSmileys(arr, i + 1, result);
 // 	}
 
-// 	return 1;
+// 	return countSmileys(arr, i + 1, result);
 // }
-// function two(action) {
-// 	if (action) {
-// 		return action(2);
+// console.log(countSmileys([":)", ":(", ":D", ":O", ":;"]));
+("Моє розв'язання (Цикл з мутуванням оригінального масиву)");
+// function countSmileys(arr) {
+// 	const regExp = /^[:;][-~]?[)D]$/;
+
+// 	for (let i = arr.length - 1; i >= 0; i--) {
+// 		if (!regExp.test(arr[i])) {
+// 			arr.splice(i, 1);
+// 		}
 // 	}
 
-// 	return 2;
+// 	return arr;
 // }
-// function three(action) {
-// 	if (action) {
-// 		return action(3);
-// 	}
+// console.log(countSmileys([":)", ":(", ":D", ":O", ":;"]));
+"--------------------------------------------------------------------------------------",
+	"Шифровка строки за допомогою ROT13";
+("Моє розв'язання");
+// function rot13(message) {
+// 	const alphabet = "abcdefghijklmnopqrstuvwxyz";
+// 	const middle = alphabet.indexOf("m");
 
-// 	return 3;
-// }
-// function four(action) {
-// 	if (action) {
-// 		return action(4);
-// 	}
+// 	return message
+// 		.split("")
+// 		.map(e => {
+// 			if (e === " " || !/^[a-zA-Z]$/.test(e)) {
+// 				return e;
+// 			}
+// 			const elIdx = alphabet.indexOf(e.toLowerCase());
 
-// 	return 4;
-// }
-// function five(action) {
-// 	if (action) {
-// 		return action(5);
-// 	}
-
-// 	return 5;
-// }
-// function six(action) {
-// 	if (action) {
-// 		return action(6);
-// 	}
-
-// 	return 6;
-// }
-// function seven(action) {
-// 	if (action) {
-// 		return action(7);
-// 	}
-
-// 	return 7;
-// }
-// function eight(action) {
-// 	if (action) {
-// 		return action(8);
-// 	}
-
-// 	return 8;
-// }
-// function nine(action) {
-// 	if (action) {
-// 		return action(9);
-// 	}
-
-// 	return 9;
+// 			if (e === e.toLowerCase()) {
+// 				return elIdx > middle ? alphabet[elIdx - 13] : alphabet[elIdx + 13];
+// 			} else {
+// 				return elIdx > middle ? alphabet[elIdx - 13].toUpperCase() : alphabet[elIdx + 13].toUpperCase();
+// 			}
+// 		})
+// 		.join("");
 // }
 
-// function plus(n) {
-// 	return function (v) {
-// 		return v + n;
-// 	};
-// }
-// function minus(n) {
-// 	return function (v) {
-// 		return v - n;
-// 	};
-// }
-// function times(n) {
-// 	return function (v) {
-// 		return v * n;
-// 	};
-// }
-// function dividedBy(n) {
-// 	return function (v) {
-// 		return v / n;
-// 	};
-// }
+// console.log(rot13("Ruby is cool!"));
+"--------------------------------------------------------------------------------------", "";
+"Повертаємо порядковий номер в алфавіті замість символа"("Моє розв'язання");
+function alphabetPosition(text) {
+	const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-const seven = fn => (fn ? fn(7) : 7);
-const five = fn => (fn ? fn(5) : 5);
+	return text
+		.toLowerCase()
+		.split("")
+		.map(e => {
+			if (/^[a-zA-Z]$/.test(e)) {
+				return alphabet.indexOf(e) + 1;
+			}
+		})
+		.filter(e => e)
+		.join(",");
+}
 
-const times = n => a => n * a;
-
-console.log(seven(times(five())));
+console.log(alphabetPosition("The sunset sets at twelve o' clock."));
