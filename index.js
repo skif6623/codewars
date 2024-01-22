@@ -1309,20 +1309,126 @@
 
 // console.log(rot13("Ruby is cool!"));
 "--------------------------------------------------------------------------------------", "";
-"Повертаємо порядковий номер в алфавіті замість символа"("Моє розв'язання");
-function alphabetPosition(text) {
-	const alphabet = "abcdefghijklmnopqrstuvwxyz";
+("Повертаємо порядковий номер в алфавіті замість символа");
+("Моє розв'язання");
+// function alphabetPosition(text) {
+// 	const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-	return text
-		.toLowerCase()
-		.split("")
-		.map(e => {
-			if (/^[a-zA-Z]$/.test(e)) {
-				return alphabet.indexOf(e) + 1;
+// 	return text
+// 		.toLowerCase()
+// 		.split("")
+// 		.map(e => {
+// 			if (/^[a-zA-Z]$/.test(e)) {
+// 				return alphabet.indexOf(e) + 1;
+// 			}
+// 		})
+// 		.filter(e => e)
+// 		.join(",");
+// }
+("Розв'язання з codewars(вираховуєм номер букви з юнікоду)");
+// function alphabetPosition(text) {
+// 	return text
+// 		.toLowerCase()
+// 		.split("")
+// 		.map(a => a.charCodeAt(0) - 96)
+// 		.filter(a => a > 0 && a < 27)
+// 		.join(" ");
+// }
+// console.log(alphabetPosition("The sunset sets at twelve o' clock."));
+"--------------------------------------------------------------------------------------", "";
+("Шифрування і розшифрування повідомлення [...парні індекси, ...непарні індекси]");
+("Моє розв'язання");
+
+// function encrypt(text, n) {
+// 	let textArr = text.split("");
+// 	let odd = [];
+// 	let even = [];
+
+// 	if (!n) return text;
+
+// 	while (n--) {
+// 		textArr.forEach((e, idx) => {
+// 			if (idx % 2 === 0) {
+// 				odd.push(e);
+// 				return;
+// 			}
+// 			return even.push(e);
+// 		});
+// 		textArr = [...even, ...odd];
+// 		odd = [];
+// 		even = [];
+// 	}
+
+// 	return textArr.join("");
+// }
+
+function decrypt(encryptedText, n) {
+	while (n--) {
+		const encryptedArray = encryptedText.split("");
+		const result = Array(encryptedArray.length);
+		const odd = [];
+		const even = [];
+		let j = 0;
+
+		encryptedArray.forEach((e, i) => {
+			if (i < Math.ceil(encryptedArray.length / 2)) {
+				odd.push(e);
+			} else {
+				even.push(e);
 			}
-		})
-		.filter(e => e)
-		.join(",");
+		});
+
+		for (let i = 1; i < result.length; i += 2) {
+			result[i] = odd[j++];
+		}
+
+		j = 0;
+
+		for (let i = 0; i < result.length; i += 2) {
+			result[i] = even[j++];
+		}
+		encryptedText = result.join("");
+	}
+
+	return encryptedText;
 }
 
-console.log(alphabetPosition("The sunset sets at twelve o' clock."));
+const e = encrypt("012345", 2);
+console.log(decrypt(e, 2));
+
+("Розв'язання з codewars");
+// function encrypt(text, n) {
+// 	if (!text || n <= 0) return text;
+// 	while (n--) {
+// 		let ans = "";
+// 		for (let i = 1; i < text.length; i += 2) {
+// 			ans += text[i];
+// 		}
+// 		for (let i = 0; i < text.length; i += 2) {
+// 			ans += text[i];
+// 		}
+// 		text = ans;
+// 	}
+// 	return text;
+// }
+
+// console.log(encrypt("012345", 1));
+
+// function decrypt(encryptedText, n) {
+// 	if (!encryptedText || n <= 0) return encryptedText;
+// 	const ans = new Array(encryptedText.length);
+// 	while (n--) {
+// 		let j = 0;
+// 		for (let i = 1; i < ans.length; i += 2) {
+// 			ans[i] = encryptedText[j++];
+// 		}
+// 		for (let i = 0; i < ans.length; i += 2) {
+// 			ans[i] = encryptedText[j++];
+// 		}
+// 		encryptedText = ans.join("");
+// 	}
+// 	return encryptedText;
+// }
+
+// const a = encrypt("012345", 2);
+// console.log(decrypt(a, 2));
