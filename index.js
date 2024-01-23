@@ -1362,55 +1362,55 @@
 // 	return textArr.join("");
 // }
 
-function decrypt(encryptedText, n) {
-	while (n--) {
-		const encryptedArray = encryptedText.split("");
-		const result = Array(encryptedArray.length);
-		const odd = [];
-		const even = [];
-		let j = 0;
+// function decrypt(encryptedText, n) {
+// 	while (n--) {
+// 		const encryptedArray = encryptedText.split("");
+// 		const result = Array(encryptedArray.length);
+// 		const odd = [];
+// 		const even = [];
+// 		let j = 0;
 
-		encryptedArray.forEach((e, i) => {
-			if (i < Math.ceil(encryptedArray.length / 2)) {
-				odd.push(e);
-			} else {
-				even.push(e);
-			}
-		});
+// 		encryptedArray.forEach((e, i) => {
+// 			if (i < Math.ceil(encryptedArray.length / 2)) {
+// 				odd.push(e);
+// 			} else {
+// 				even.push(e);
+// 			}
+// 		});
 
-		for (let i = 1; i < result.length; i += 2) {
-			result[i] = odd[j++];
-		}
+// 		for (let i = 1; i < result.length; i += 2) {
+// 			result[i] = odd[j++];
+// 		}
 
-		j = 0;
+// 		j = 0;
 
-		for (let i = 0; i < result.length; i += 2) {
-			result[i] = even[j++];
-		}
-		encryptedText = result.join("");
-	}
+// 		for (let i = 0; i < result.length; i += 2) {
+// 			result[i] = even[j++];
+// 		}
+// 		encryptedText = result.join("");
+// 	}
 
-	return encryptedText;
-}
+// 	return encryptedText;
+// }
 
-const e = encrypt("012345", 2);
-console.log(decrypt(e, 2));
+// const e = encrypt("012345", 2);
+// console.log(decrypt(e, 2));
 
 ("Розв'язання з codewars");
-// function encrypt(text, n) {
-// 	if (!text || n <= 0) return text;
-// 	while (n--) {
-// 		let ans = "";
-// 		for (let i = 1; i < text.length; i += 2) {
-// 			ans += text[i];
-// 		}
-// 		for (let i = 0; i < text.length; i += 2) {
-// 			ans += text[i];
-// 		}
-// 		text = ans;
-// 	}
-// 	return text;
-// }
+function encrypt(text, n) {
+	if (!text || n <= 0) return text;
+	while (n--) {
+		let ans = "";
+		for (let i = 1; i < text.length; i += 2) {
+			ans += text[i];
+		}
+		for (let i = 0; i < text.length; i += 2) {
+			ans += text[i];
+		}
+		text = ans;
+	}
+	return text;
+}
 
 // console.log(encrypt("012345", 1));
 
@@ -1432,3 +1432,30 @@ console.log(decrypt(e, 2));
 
 // const a = encrypt("012345", 2);
 // console.log(decrypt(a, 2));
+
+function squareDigits(num) {
+	return num
+		.toString()
+		.split("")
+		.map(n => Math.pow(Number(n), 2))
+		.join("");
+}
+
+console.log(squareDigits(9119));
+
+// var uniqueInOrder = function (iterable) {
+// 	let result = [];
+
+// 	for (let i = 0; i < iterable.length; i++) {
+// 		if (iterable[i] !== iterable[i + 1]) {
+// 			result.push(iterable[i]);
+// 		}
+// 	}
+// 	return result;
+// };
+
+var uniqueInOrder = function (iterable) {
+	return [...iterable].filter((a, i) => a !== iterable[i - 1]);
+};
+
+console.log(uniqueInOrder("ABBCcAD"));
